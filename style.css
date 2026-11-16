@@ -49,6 +49,8 @@ a { color: var(--accent-ink); text-underline-offset: 2px; }
 .bar nav a:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
 .bar nav a[aria-current="page"] { background: rgba(255, 255, 255, 0.2); color: #fff; }
 .hero-body { padding-top: 40px; display: flex; align-items: center; gap: 20px; }
+/* Same header height on every page: room for the title plus two subtitle lines. */
+.hero-body > div { min-height: 92px; display: flex; flex-direction: column; justify-content: center; }
 .hero-body img { width: 88px; height: 88px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); flex: none; }
 .hero h1 { margin: 0; font-size: 34px; line-height: 1.15; letter-spacing: -0.02em; }
 .hero p { margin: 6px 0 0; color: rgba(255, 255, 255, 0.85); font-size: 16px; }
@@ -66,19 +68,21 @@ main { padding: 0 16px 48px; margin-top: -32px; }
 .card h2::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
 .card p { margin: 0 0 10px; }
 .card p:last-child { margin-bottom: 0; }
-.lead { border-left: 4px solid var(--accent); }
+.lead { border-color: color-mix(in srgb, var(--accent) 55%, transparent); border-width: 1.5px; }
 .lead p { font-size: 18px; }
 .muted { color: var(--muted); font-size: 15px; }
 
-.contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.contact .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 14px; }
+.contact .actions .muted a { color: var(--muted); }
 .button {
   display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600;
-  padding: 10px 18px; border-radius: 999px;
+  padding: 0 22px; min-height: 44px; line-height: 44px; border-radius: 999px;
 }
 @media (prefers-color-scheme: dark) { .button { color: #062a2b; } }
 .button:hover { filter: brightness(1.06); }
 
-.links { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.links { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.links .card { margin-bottom: 0; }
 .links a { display: block; text-decoration: none; color: var(--fg); }
 .links a strong { color: var(--accent-ink); display: block; font-size: 18px; margin-bottom: 4px; }
 
@@ -87,8 +91,10 @@ footer { max-width: 720px; margin: 0 auto; padding: 8px 16px 40px; color: var(--
 @media (max-width: 520px) {
   .hero-body { gap: 14px; padding-top: 28px; }
   .hero-body img { width: 64px; height: 64px; border-radius: 15px; }
+  .hero-body > div { min-height: 90px; }
   .hero h1 { font-size: 28px; }
-  .card { padding: 18px; }
+  .card { padding: 18px 20px; }
+  .contact .actions .button, .contact .actions .muted { flex: 1 1 100%; text-align: center; }
   .links { grid-template-columns: 1fr; }
   .brand span { display: none; }
 }
